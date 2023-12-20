@@ -23,15 +23,13 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult GetById(int id)
-    {
-        return Ok(_todoService.Get(id));
-    }
+    public async Task<ActionResult> GetById(int id) =>  Ok(await _todoService.Get(id));
+
 
     [HttpPost]
-    public ActionResult Create(TodoDto todoDto)
+    public async Task<ActionResult> Create(TodoDto todoDto)
     {
-        _todoService.Create(todoDto);
+        await _todoService.Create(todoDto);
         return NoContent();
     }
 }

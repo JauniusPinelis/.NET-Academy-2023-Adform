@@ -14,20 +14,24 @@ namespace Todos.WebApi.Repositories
             _dataContext = dataContext;
         }
 
-        public List<TodoEntity> Get()
+        public async Task<List<TodoEntity>> Get()
         {
-            return _dataContext.Todos.ToList();
+            var result = _dataContext.Todos.Where(x => x.Id > 20);
+
+            result = result.Where(x => x.Id > 30);
+
+            return await result.ToListAsync();
         }
 
-        public TodoEntity Get(int id)
+        public async Task<TodoEntity> Get(int id)
         {
-            return _dataContext.Todos.FirstOrDefault(t => t.Id == id);
+            return await _dataContext.Todos.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public void Create(TodoEntity entity)
+        public async Task Create(TodoEntity entity)
         {
             _dataContext.Todos.Add(entity);
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

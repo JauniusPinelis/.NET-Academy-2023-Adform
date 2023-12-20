@@ -2,18 +2,19 @@
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
+using Todos.WebApi.Exceptions;
 
 namespace Todos.WebApi.Middlewares
 {
-    public class ErrorHandlingMiddleware
+    public class ErrorHandlerMiddleware
     {
-       
         private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
 
-     
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -22,17 +23,30 @@ namespace Todos.WebApi.Middlewares
             {
                 await _next(context);
             }
-            catch (Exception exception)
+            catch (Exception error)
             {
-                // log the error
-                
                 var response = context.Response;
                 response.ContentType = "application/json";
 
-                // get the response code and message
-                
-                response.StatusCode = (int)404;
-                //await response.WriteAsync(JsonSerializer.Deserialize(exception));
+                switch (error)
+                {
+                    case TodoNotFoundException e:
+                        // custom application error
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
+                    case KeyNotFoundException e:
+                        // not found error
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
+                    default:
+                        // unhandled error
+                        _logger.LogError(error, error.Message);
+                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        break;
+                }
+
+                var result = JsonSerializer.Serialize(new { message = error?.Message });
+                await response.WriteAsync(result);
             }
         }
     }

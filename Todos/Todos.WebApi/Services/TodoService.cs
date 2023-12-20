@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Todos.WebApi.Dtos;
 using Todos.WebApi.Entities;
+using Todos.WebApi.Exceptions;
 using Todos.WebApi.Repositories;
 
 namespace Todos.WebApi.Services
@@ -14,23 +15,23 @@ namespace Todos.WebApi.Services
             _todoRepository = todoRepository;
         }
 
-        public TodoDto Get(int id)
+        public async Task<TodoDto> Get(int id)
         {
-            var entity = _todoRepository.Get(id);
+            var entity = await _todoRepository.Get(id);
             if (entity is null)
             {
-                throw new ArgumentNullException("todo not found");
+                throw new TodoNotFoundException();
             }
 
             return new TodoDto { Id =  entity.Id, Title = entity.Title };
 
         }
 
-        public List<TodoDto> Get()
+        public async Task< List<TodoDto> > Get()
         {
             List<TodoDto> todoDtos1 =  new ();
 
-            var todos = _todoRepository.Get();
+            var todos = await _todoRepository.Get();
 
             var todoDtos = todos.Select(t => new TodoDto
             {
@@ -41,7 +42,7 @@ namespace Todos.WebApi.Services
             return todoDtos;
         }
 
-        public void Create(TodoDto todoDto)
+        public async Task Create(TodoDto todoDto)
         {
             var entity = new TodoEntity
             {
@@ -49,7 +50,7 @@ namespace Todos.WebApi.Services
                 Title = todoDto.Title
             };
 
-            _todoRepository.Create(entity);
+            await _todoRepository.Create(entity);
         }
     }
 }
