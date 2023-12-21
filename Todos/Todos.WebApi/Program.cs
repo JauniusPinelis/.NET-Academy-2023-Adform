@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(o => o.UseInMemoryDatabase("MyDatabase"));
 builder.Services.AddTransient<TodoService>();
-builder.Services.AddTransient<TodoRepository>();
+builder.Services.AddTransient<ITodoRepository,TodoRepository>();
 
 
 var app = builder.Build();
