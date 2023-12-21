@@ -8,9 +8,9 @@ namespace Todos.WebApi.Services
 {
     public class TodoService
     {
-        private readonly TodoRepository _todoRepository;
+        private readonly ITodoRepository _todoRepository;
 
-        public TodoService(TodoRepository todoRepository)
+        public TodoService(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository;
         }
@@ -29,8 +29,6 @@ namespace Todos.WebApi.Services
 
         public async Task< List<TodoDto> > Get()
         {
-            List<TodoDto> todoDtos1 =  new ();
-
             var todos = await _todoRepository.Get();
 
             var todoDtos = todos.Select(t => new TodoDto

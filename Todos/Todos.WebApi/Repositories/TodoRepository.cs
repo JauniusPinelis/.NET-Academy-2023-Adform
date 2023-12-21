@@ -5,7 +5,7 @@ using Todos.WebApi.Entities;
 
 namespace Todos.WebApi.Repositories
 {
-    public class TodoRepository
+    public class TodoRepository : ITodoRepository
     {
         private readonly DataContext _dataContext;
 
