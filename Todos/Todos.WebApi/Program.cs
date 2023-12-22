@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
+using Todos.WebApi.Clients;
 using Todos.WebApi.Contexts;
 using Todos.WebApi.Middlewares;
 using Todos.WebApi.Repositories;
@@ -16,6 +17,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(o => o.UseInMemoryDatabase("MyDatabase"));
 builder.Services.AddTransient<TodoService>();
 builder.Services.AddTransient<ITodoRepository,TodoRepository>();
+builder.Services.AddTransient<JsonPlaceholderClient>();
+
+builder.Services.AddHttpClient();
 
 
 var app = builder.Build();

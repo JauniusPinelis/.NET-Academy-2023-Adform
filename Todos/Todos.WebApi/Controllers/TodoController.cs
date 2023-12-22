@@ -4,7 +4,7 @@ using Todos.WebApi.Services;
 
 namespace Todos.WebApi.Controllers;
 
-[ApiController]
+[ApiController()]
 [Route("[controller]")]
 public class TodoController : ControllerBase
 {
