@@ -4,5 +4,9 @@
 
 Advanced:
 0. Introducing new type 'Shop' to which 'Item' belongs to.
-1. There should be CRUD to 'Shop' as well.
+1. There should be CRUD to 'Shop' as well. 
+2. Shop has 'name', 'address'.
+3. You should be able to assign/update items to a shop.
+4. 'User' should be able to buy an item.
+
 1. Apply Clean architecture principles 
