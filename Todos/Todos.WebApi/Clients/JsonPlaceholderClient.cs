@@ -18,5 +18,28 @@ namespace Todos.WebApi.Clients
 
             return users;
         }
+
+        public async Task<JsonPlaceholderResult<UserDto>> GetUserAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsAsync<UserDto>();
+
+                return new JsonPlaceholderResult<UserDto> {
+                    Data = data,
+                    IsSuccessful = true,
+                    ErrorMessage = ""
+                };
+            }
+            else
+            {
+                return new JsonPlaceholderResult<UserDto>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = response.StatusCode.ToString()
+                };
+            }
+        }
     }
 }
