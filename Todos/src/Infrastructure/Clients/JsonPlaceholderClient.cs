@@ -1,8 +1,8 @@
 ﻿using Todos.WebApi.Dtos;
 
-namespace Todos.WebApi.Clients
+namespace Infrastructure.Clients
 {
-    public class JsonPlaceholderClient
+    public class JsonPlaceholderClient : IJsonPlaceholderClient
     {
         private HttpClient _httpClient;
 
@@ -11,7 +11,7 @@ namespace Todos.WebApi.Clients
             _httpClient = httpClient;
         }
 
-        public async Task< List<UserDto>> GetUsers()
+        public async Task<List<UserDto>> GetUsers()
         {
             var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
             var users = await response.Content.ReadAsAsync<List<UserDto>>();
@@ -26,7 +26,8 @@ namespace Todos.WebApi.Clients
             {
                 var data = await response.Content.ReadAsAsync<UserDto>();
 
-                return new JsonPlaceholderResult<UserDto> {
+                return new JsonPlaceholderResult<UserDto>
+                {
                     Data = data,
                     IsSuccessful = true,
                     ErrorMessage = ""

@@ -1,13 +1,13 @@
-﻿using Todos.WebApi.Clients;
+﻿using Infrastructure.Clients;
 using Todos.WebApi.Dtos;
 
 namespace Todos.WebApi.Services
 {
     public class UserService
     {
-        private readonly JsonPlaceholderClient _client;
+        private readonly IJsonPlaceholderClient _client;
 
-        public UserService(JsonPlaceholderClient client)
+        public UserService(IJsonPlaceholderClient client)
         {
             _client = client;
         }

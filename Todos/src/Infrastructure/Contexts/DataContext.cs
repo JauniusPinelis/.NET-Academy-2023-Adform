@@ -2,7 +2,7 @@
 using System;
 using Todos.WebApi.Entities;
 
-namespace Todos.WebApi.Contexts;
+namespace Infrastructure.Contexts;
 
 public class DataContext : DbContext
 {
@@ -10,7 +10,7 @@ public class DataContext : DbContext
 
     public DataContext(DbContextOptions<DataContext>
         options) : base(options)
-            {
+    {
 
-            }
+    }
 }

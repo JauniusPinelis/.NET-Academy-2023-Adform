@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Todos.WebApi.Contexts;
+﻿using Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 using Todos.WebApi.Dtos;
 using Todos.WebApi.Entities;
+using Todos.WebApi.Repositories;
 
-namespace Todos.WebApi.Repositories
+namespace Infrastructure.Repositories
 {
     public class TodoRepository : ITodoRepository
     {

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Todos.WebApi.Contexts;
 using Todos.WebApi.Entities;
 using Todos.WebApi.Exceptions;
 using Todos.WebApi.Repositories;

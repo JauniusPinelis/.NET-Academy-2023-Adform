@@ -1,7 +1,8 @@
+using Infrastructure.Clients;
+using Infrastructure.Contexts;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Todos.WebApi.Clients;
-using Todos.WebApi.Contexts;
 using Todos.WebApi.Middlewares;
 using Todos.WebApi.Repositories;
 using Todos.WebApi.Services;
