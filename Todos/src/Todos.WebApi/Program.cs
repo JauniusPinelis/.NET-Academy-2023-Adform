@@ -1,3 +1,5 @@
+using Application;
+using Infrastructure;
 using Infrastructure.Clients;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories;
@@ -15,12 +17,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>(o => o.UseInMemoryDatabase("MyDatabase"));
-builder.Services.AddTransient<TodoService>();
-builder.Services.AddTransient<ITodoRepository,TodoRepository>();
-builder.Services.AddTransient<JsonPlaceholderClient>();
-
-builder.Services.AddHttpClient();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 
 var app = builder.Build();
