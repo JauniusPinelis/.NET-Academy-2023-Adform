@@ -20,8 +20,7 @@ namespace Infrastructure
             services.AddDbContext<DataContext>(o => o.UseInMemoryDatabase("MyDatabase"));
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddTransient<JsonPlaceholderClient>();
-
-            builder.Services.AddHttpClient();
+            services.AddHttpClient();
         }
     }
 }
