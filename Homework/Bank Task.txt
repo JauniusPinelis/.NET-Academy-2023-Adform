@@ -7,5 +7,7 @@ Functional requirements:
 4. Account can have a type "Saving"/"Default" and a balance.
 5. You should be able to topup an account.
 6. User should be able to send money to another user. Lets call it transaction
-7. It should be possible to retrieve all transaction information for a user.
+7. It should be possible to retrieve all transaction information for an account:
+    I need to be able (given userid), tops, money sent, received.
 8. Transaction costs 1 euro.
+
