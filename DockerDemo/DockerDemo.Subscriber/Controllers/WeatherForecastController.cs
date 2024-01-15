@@ -1,9 +1,6 @@
-using DockerDemo.Shared;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using static MassTransit.Monitoring.Performance.BuiltInCounters;
 
-namespace DockerDemo.Controllers
+namespace DockerDemo.Subscriber.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -16,20 +13,14 @@ namespace DockerDemo.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        private readonly IBus _bus;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBus bus)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            _bus = bus;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IEnumerable<WeatherForecast> >Get()
+        public IEnumerable<WeatherForecast> Get()
         {
-            await _bus.Publish(new IteamCreated(Id:1,Message: "test"));
-
-
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
